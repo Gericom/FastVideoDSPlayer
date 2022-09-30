@@ -5,7 +5,7 @@ ifeq ($(strip $(DEVKITARM)),)
 $(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>devkitARM")
 endif
 
-export TARGET	:=	$(shell basename $(CURDIR))
+export TARGET	:=	FastVideoDS
 export TOPDIR	:=	$(CURDIR)
 
 # specify a directory which contains the nitro filesystem
