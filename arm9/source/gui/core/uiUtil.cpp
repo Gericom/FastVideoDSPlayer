@@ -1,4 +1,4 @@
-#include <nds.H>
+#include <nds.h>
 #include "uiUtil.h"
 
 void uiutil_convertToObj(u8* src, int width, int height, int stride, u16* dst)
