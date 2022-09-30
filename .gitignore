@@ -1,0 +1,10 @@
+.vscode/
+tmp/
+nitrofiles/
+*.nds
+arm7/build/
+arm9/build/
+*.elf
+FatInNitroFS.dldi
+arm7/source/isdprint.c
+Makefile_isnitro

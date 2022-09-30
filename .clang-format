@@ -1,0 +1,9 @@
+BasedOnStyle: Microsoft
+AlignConsecutiveMacros: 'true'
+AlignEscapedNewlines: Left
+AlwaysBreakTemplateDeclarations: 'Yes'
+BreakBeforeBraces: Allman
+Cpp11BracedListStyle: 'false'
+IndentCaseLabels: 'true'
+PointerAlignment: Left
+SortIncludes: 'false'
