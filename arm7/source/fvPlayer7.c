@@ -5,6 +5,7 @@
 #include "fat.h"
 #include "adpcm.h"
 #include "irqWait.h"
+#include "../../common/twlwram.h"
 #include "fvPlayer7.h"
 
 #define FV_AUDIO_START_OFFSET 12
@@ -324,8 +325,13 @@ static void handleFifo(u32 value)
         }
 
         case IPC_CMD_HANDSHAKE:
-            fifoSendValue32(FIFO_USER_01, IPC_CMD_PACK(IPC_CMD_HANDSHAKE, 0));
+        {
+            bool canUseWram = false;
+            if (isDSiMode())
+                canUseWram = twr_isUnlocked();
+            fifoSendValue32(FIFO_USER_01, IPC_CMD_PACK(IPC_CMD_HANDSHAKE, canUseWram ? 1 : 0));
             break;
+        }
     }
 }
 

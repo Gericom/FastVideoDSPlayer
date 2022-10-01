@@ -66,3 +66,14 @@ void twr_mapWramCSlot(int slot, TWRWramCSlotMaster master, int offset, bool enab
 }
 
 #endif
+
+bool twr_isUnlocked(void)
+{
+    if ((REG_SCFG_EXT & 0x80000000) == 0)
+        return false; // SCFG and MBK registers are permanently locked
+
+    if ((REG_MBK9 & 0xFFFF0F) != 0)
+        return false; // One or more MBK registers are locked
+
+    return true; 
+}

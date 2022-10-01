@@ -46,7 +46,7 @@ typedef struct
 extern "C" {
 #endif
 
-bool fv_initPlayer(fv_player_t* player, const char* filePath);
+bool fv_initPlayer(fv_player_t* player, const char* filePath, bool useWram);
 void fv_destroyPlayer(fv_player_t* player);
 void fv_startPlayer(fv_player_t* player);
 void fv_updatePlayer(fv_player_t* player);

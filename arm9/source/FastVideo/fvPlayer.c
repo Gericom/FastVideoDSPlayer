@@ -199,10 +199,10 @@ static u32* makeMbRenderDl(u32* displayList, int height, u32 texParam)
     return displayList;
 }
 
-bool fv_initPlayer(fv_player_t* player, const char* filePath)
+bool fv_initPlayer(fv_player_t* player, const char* filePath, bool useWram)
 {
     memset(player, 0, sizeof(fv_player_t));
-    if (isDSiMode())
+    if (isDSiMode() && twr_isUnlocked() && useWram)
         player->dataBuffer = (u8*)twr_getBlockAddress(TWR_WRAM_BLOCK_B);
     else
         player->dataBuffer = memalign(32, FV_PLAYER_DATA_BUFFER_SIZE * FV_PLAYER_DATA_BUFFER_COUNT);

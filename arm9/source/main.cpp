@@ -20,12 +20,14 @@ int main(int argc, char** argv)
 
     mpu_enableVramCache();
 
-    if (isDSiMode())
+    bool canUseWram = false;
+    if (isDSiMode() && twr_isUnlocked())
     {
         twr_setBlockMapping(TWR_WRAM_BLOCK_A, 0x03000000, 0x40000, TWR_WRAM_BLOCK_IMAGE_SIZE_256K);
         twr_setBlockMapping(TWR_WRAM_BLOCK_B, 0x03100000, 0x40000, TWR_WRAM_BLOCK_IMAGE_SIZE_256K);
         twr_setBlockMapping(TWR_WRAM_BLOCK_C, 0x03140000, 0x40000, TWR_WRAM_BLOCK_IMAGE_SIZE_256K);
         mpu_enableTwlWramCache();
+        canUseWram = true;
     }
 
     fifoSetValue32Handler(FIFO_USER_01, NULL, NULL);
@@ -33,7 +35,10 @@ int main(int argc, char** argv)
     // handshake
     fifoSendValue32(FIFO_USER_01, IPC_CMD_PACK(IPC_CMD_HANDSHAKE, 0));
     fifoWaitValue32(FIFO_USER_01);
-    fifoGetValue32(FIFO_USER_01);
+    u32 handShake = fifoGetValue32(FIFO_USER_01);
+
+    if (canUseWram && (handShake & IPC_CMD_ARG_MASK) == 0)
+        canUseWram = false;
 
     if (!isDSiMode())
     {
@@ -72,7 +77,7 @@ int main(int argc, char** argv)
         filePath = argv[1];
 
     // iprintf("Playing %s\n", filePath);
-    if (fv_initPlayer(&sPlayer, filePath))
+    if (fv_initPlayer(&sPlayer, filePath, canUseWram))
     {
         sPlayerController = new PlayerController(&sPlayer);
         sPlayerController->Initialize();

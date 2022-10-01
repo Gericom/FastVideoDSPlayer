@@ -93,6 +93,22 @@ void twr_mapWramCSlot(int slot, TWRWramCSlotMaster master, int offset, bool enab
 
 #endif
 
+bool twr_isUnlocked(void);
+
+#ifdef ARM7
+
+static inline bool twr_isUnlockable(void)
+{
+    return (REG_SCFG_EXT & 0x80000000) != 0;
+}
+
+static inline void twr_unlockAll(void)
+{
+    REG_MBK9 = 0;
+}
+
+#endif
+
 #ifdef __cplusplus
 }
 #endif

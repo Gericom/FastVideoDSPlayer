@@ -114,8 +114,14 @@ int main(void)
 
     if (isDSiMode())
     {
-        twr_setBlockMapping(TWR_WRAM_BLOCK_B, 0x03100000, 0x40000, TWR_WRAM_BLOCK_IMAGE_SIZE_256K);
-        twr_setBlockMapping(TWR_WRAM_BLOCK_C, 0x03140000, 0x40000, TWR_WRAM_BLOCK_IMAGE_SIZE_256K);
+        if (twr_isUnlockable())
+            twr_unlockAll();
+
+        if (twr_isUnlocked())
+        {
+            twr_setBlockMapping(TWR_WRAM_BLOCK_B, 0x03100000, 0x40000, TWR_WRAM_BLOCK_IMAGE_SIZE_256K);
+            twr_setBlockMapping(TWR_WRAM_BLOCK_C, 0x03140000, 0x40000, TWR_WRAM_BLOCK_IMAGE_SIZE_256K);
+        }
 
         // switch to 47kHz output
         REG_SNDEXTCNT = 0;
