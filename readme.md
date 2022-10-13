@@ -1,6 +1,6 @@
 FastVideoDS Player
 ===================
-Player for the FastVideoDS format. Opens the video file supplied by argv, or otherwise `testVideo.fv` on the root of your sd card.
+Player for the FastVideoDS format. Opens the video file supplied by argv, or otherwise `testVideo.fv` on the root of your sd card. Use [FastVideoDS Encoder](https://github.com/Gericom/FastVideoDSEncoder) to encode your videos.
 
 ## Features
 - Supports long videos
