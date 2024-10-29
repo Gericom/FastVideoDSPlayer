@@ -35,6 +35,8 @@ extern FN_MEDIUM_READSECTORS _DLDI_readSectors_ptr;
 /* Inidialize a Drive                                                    */
 /*-----------------------------------------------------------------------*/
 
+void sdmmc_sd_startup();
+
  DSTATUS disk_initialize (
 	BYTE pdrv				/* Physical drive nmuber to identify the drive */
 )
