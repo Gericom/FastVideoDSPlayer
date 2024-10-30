@@ -18,16 +18,11 @@ jobs:
     name: Build with Docker using devkitARM
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Make application
         run: |
           make
-      - name: Prepare for build publishing
-        run: |
-          mkdir -p ~/artifacts
-          cp -f FastVideoDS.nds ~/artifacts/
       - name: Publish build to GH Actions
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          path: ~/artifacts/*
-          name: build
+          path: FastVideoDS.nds
